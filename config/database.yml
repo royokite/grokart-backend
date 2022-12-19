@@ -81,6 +81,7 @@ test:
 #
 production:
   <<: *default
+  url: <%= ENV['DATABASE_URL'] %>
   database: grokart_backend_production
   username: grokart_backend
   password: <%= ENV["GROKART_BACKEND_DATABASE_PASSWORD"] %>
