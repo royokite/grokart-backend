@@ -1,5 +1,6 @@
 class ApplicationController < ApplicationController
     before_action :authenticate 
+    SECRET = 'gro_@_food_._com'
 
     def authenticate
         if request.headers["Authorization"]
