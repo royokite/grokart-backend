@@ -24,9 +24,9 @@ default: &default
 development:
   <<: *default
   database: grokart_backend_development
-  # host: 127.0.0.1
+  host: localhost
   username: postgres
-  password: 12345678
+  password: postgres
 
   # The specified database role being used to connect to postgres.
   # To create additional roles in postgres see `$ createuser --help`.

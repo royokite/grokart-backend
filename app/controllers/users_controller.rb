@@ -1,34 +1,37 @@
 class UsersController < ApplicationController
-    # GET /Users
     def index
-        user = User.all
-        render json: user , status: :ok
+        render json: User.all
     end
 
-    # POST /login
-    def create
-        @user = User.new(user_params)
-        if user.save
-            payload = { user_id: @user.id}
-            token = create_token(payload)
-            render json: @user, status: :created, location: @user
+    #Handle auto-login by implementing a `GET /me` route.
+    def show
+        user = User.find_by(id: session[:user_id]);
+        if user
+            render json: user, status: :created 
         else
-            render json: @user.errors, status: :unprocessable_entity
+            render json: {error: "Not authorised"}, status: :unauthorized
         end
     end
 
-    # GET /me
-    def show
-        user = User.find_by(id: session[:user_id])
-        if user
-            render json: user, status: :ok
+    #Handle sign up by implementing a `POST /signup` route.
+    def create
+        user = User.create(user_params);
+        if user.valid?
+            session[:user_id] = user.id;
+            render json:user, status: :created
         else
-            render json: {errors: "Not authorised"}, status: :unauthorized
+            render json: { errors: user.errors.full_messages }, status: :unprocessable_entity
         end
     end
 
     private
     def user_params
-        params.permit(:username, :email, :password, :password_confirmation)
+        params.permit(:name, :age, :gender, :address, :contact, :username, :password_confirmation)
     end
+
+    def find_user
+        User.find(params[:id])
+    end
+
 end
+
