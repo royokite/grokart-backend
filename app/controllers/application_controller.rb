@@ -1,6 +1,6 @@
 class ApplicationController < ActionController::API
     include ActionController::Cookies
-    befor_action :authenticate
+    before_action :authenticate
 
     def authenticate
         if request.headers["Authorization"]
