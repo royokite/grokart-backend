@@ -15,19 +15,22 @@ class UsersController < ApplicationController
 
     #Handle sign up by implementing a `POST /signup` route.
     def create
-        user = User.create(user_params);
-        if user.valid?
-            session[:user_id] = user.id;
-            render json:user, status: :created
+        @user = User.create(user_params);
+        if @user.save
+            payload = { user_id: @user.id}
+            token = create_token(payload)
+            render json: @user, status: :created, location: @user
+
         else
-            render json: { errors: user.errors.full_messages }, status: :unprocessable_entity
+            render json: @user.errors, status: :unprocessable_entity
         end
     end
 
     private
     def user_params
-        params.permit(:name, :age, :gender, :address, :contact, :username, :password_confirmation)
+        params.permit(:username, :email, :age, :gender, :address, :contact, :password, :password_confirmation)
     end
+    
 
     def find_user
         User.find(params[:id])
