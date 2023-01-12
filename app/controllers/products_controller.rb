@@ -48,6 +48,7 @@ class ProductsController < ApplicationController
             render json: product, status: :ok
         else
             render json: { error: "Product not found!" }, status: :not_found
+        end
     end
 
 end

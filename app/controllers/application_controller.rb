@@ -1,5 +1,5 @@
-class ApplicationController < ApplicationController
-    before_action :authenticate 
+class ApplicationController < ActionController::API
+    # before_action :authenticate 
     SECRET = 'gro_@_food_._com'
 
     def authenticate

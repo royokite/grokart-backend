@@ -157,8 +157,7 @@ Product.create([
         description: "Ready to drink Gofrut mixed fruit juice 1L",
     },
     {
-        category_id: 5,
-        user_id: 4,
+        category_id: 4,
         image: "https://s3-eu-west-1.amazonaws.com/naivas-live/productImage/NVSL1611.jpeg",
         name: "Carrots 1 kg",
         price: 145.00,
