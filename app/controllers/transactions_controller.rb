@@ -10,5 +10,5 @@ class TransactionsController < ApplicationController
         else 
             render json: {error: "Transaction not found"}, status: :not_found
         end
-    end
+    end    
 end
