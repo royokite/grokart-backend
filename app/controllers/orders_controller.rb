@@ -67,7 +67,7 @@ class OrdersController < ApplicationController
       @order = Order.find(params[:id])
     end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
+    # Only allow a list of trusted parameters through.
     def order_params
       params.require(:order).permit(:subtotal, :date, :cart_id, :user_id, :order_items)
     end
