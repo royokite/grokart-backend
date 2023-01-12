@@ -175,7 +175,6 @@ Product.create([
     },
     {
         category_id: 1,
-        user_id: 1,
         image: "https://s3-eu-west-1.amazonaws.com/naivas-live/productImage/NVS00022.jpg",
         name: "Sirimon Cheddar Cheese 250g",
         price: 473.00,
@@ -224,7 +223,6 @@ Product.create([
     },
     {
         category_id: 3,
-        user_id: 1,
         image: "https://s3-eu-west-1.amazonaws.com/naivas-live/productImage/NVSL992.jpg",
         name: "Oranges - 5 pieces",
         price: 200.00,
@@ -233,7 +231,6 @@ Product.create([
     },
     {
         category_id: 4,
-        user_id: 1,
         image: "https://s3-eu-west-1.amazonaws.com/naivas-live/productImage/NVSL1208z.jfif",
         name: "Red Onions - 6 pieces",
         price: 82.00,
@@ -242,7 +239,6 @@ Product.create([
     },
     {
         category_id: 2,
-        user_id: 1,
         image: "https://s3-eu-west-1.amazonaws.com/naivas-live/productImage/6072.jpg",
         name: "Farmers Choice Fresh Beef Burger 400g",
         price: 355.00,
@@ -251,7 +247,6 @@ Product.create([
     },
     {
         category_id: 5,
-        user_id: 1,
         image: "https://s3-eu-west-1.amazonaws.com/naivas-live/productImage/4017.jpg",
         name: "Red Bull Energy Drink 250ml",
         price: 210.00,
@@ -260,7 +255,6 @@ Product.create([
     },
     {
         category_id: 1,
-        user_id: 1,
         image: "https://s3-eu-west-1.amazonaws.com/naivas-live/productImage/6296.jpg",
         name: "Creambell Ice Cream Cookies & Cream 500ml",
         price: 400.00,
@@ -269,7 +263,6 @@ Product.create([
     },
     {
         category_id: 6,
-        user_id: 1,
         image: "https://s3-eu-west-1.amazonaws.com/naivas-live/productImage/5317z.jpg",
         name: "Butterfly Grains Popcorn Kernels 1kg",
         price: 270.00,
