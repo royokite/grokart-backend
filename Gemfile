@@ -29,6 +29,12 @@ group :development do
   # gem "spring"
 end
 # Use Active model has_secure_password
+
 gem 'bcrypt', '~> 3.1', '>= 3.1.18'
+
 gem 'jwt'
+
+gem 'rest-client', require: false
+
+gem 'rack-cors'
 
