@@ -1,4 +1,6 @@
 class ApplicationController < ActionController::API
+    # before_action :authenticate 
+    SECRET = 'gro_@_food_._com'
 
     # before_action :authorized
     rescue_from ActiveRecord::RecordNotFound, with: :record_not_found

@@ -10,9 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_01_15_190018) do
+
+ActiveRecord::Schema[7.0].define(version: 2023_01_14_205633) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "access_tokens", force: :cascade do |t|
+    t.string "token"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "carts", force: :cascade do |t|
     t.integer "product_id"
@@ -35,6 +42,16 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_15_190018) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "mpesas", force: :cascade do |t|
+    t.string "phoneNumber"
+    t.string "amount"
+    t.string "checkoutRequestID"
+    t.string "merchantRequestID"
+    t.string "mpesaReceiptNumber"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "orders", force: :cascade do |t|
     t.integer "cart_id"
     t.integer "user_id"
@@ -53,13 +70,13 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_15_190018) do
 
   create_table "products", force: :cascade do |t|
     t.integer "category_id"
-    t.integer "user_id"
     t.string "name"
     t.float "price"
     t.integer "count"
     t.string "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "image"
   end
 
   create_table "transactions", force: :cascade do |t|
@@ -75,6 +92,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_15_190018) do
     t.string "password_digest"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "email"
   end
 
 end
