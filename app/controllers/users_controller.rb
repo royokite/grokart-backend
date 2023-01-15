@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-    before_action :authorized, except: [:create]
+    # before_action :authorized, except: [:create]
 
     # POST /register
     def create
@@ -32,7 +32,7 @@ class UsersController < ApplicationController
 
     private
     def user_params
-        params.permit(:name, :age, :gender, :address, :contact, :username, :password)
+        params.permit(:username, :password)
     end
     def login_params
         params.permit(:username, :password)
