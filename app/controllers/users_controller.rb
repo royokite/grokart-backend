@@ -1,6 +1,5 @@
 class UsersController < ApplicationController
     before_action :authorized, except: [:create]
-    # skip_before_action :authorized, only: [:create]
 
     # POST /register
     def create
@@ -14,6 +13,18 @@ class UsersController < ApplicationController
             render json: { errors: user.errors.full_messages }, status: :unprocessable_entity
         end
     end
+
+    def login
+        user = User.find_by(username: login_params[:username])
+        # authenticate user with both username and password
+        if user && user.authenticate(login_params[:password])
+            token = encode_token(user_id: user.id)
+            render json: {user: user, jwt: token}, status: :accepted
+        else
+            render json: { message: 'Invalid username or password' }, status: :unauthorized
+        end
+    end
+
     
     def profile
         render json: {user: current_user}, status: :accepted
@@ -21,5 +32,9 @@ class UsersController < ApplicationController
 
     private
     def user_params
-        params.permit(:email, :username, :password)
+        params.permit(:name, :age, :gender, :address, :contact, :username, :password)
     end
+    def login_params
+        params.permit(:username, :password)
+    end
+end
