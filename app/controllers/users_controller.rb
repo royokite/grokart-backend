@@ -18,21 +18,26 @@ class UsersController < ApplicationController
         user = User.find_by(username: login_params[:username])
         # authenticate user with both username and password
         if user && user.authenticate(login_params[:password])
-            token = encode_token(user_id: user.id)
+            if user.role == "admin"
+                # issue admin token
+                token = encode_token(user_id: user.id, role: "admin")
+            else
+                # issue regular token
+                token = encode_token(user_id: user.id)
+            end
             render json: {user: user, jwt: token}, status: :accepted
         else
             render json: { message: 'Invalid username or password' }, status: :unauthorized
         end
     end
 
-    
     def profile
         render json: {user: current_user}, status: :accepted
     end
 
     private
     def user_params
-        params.permit(:username, :password)
+        params.permit(:username, :password, :role)
     end
     def login_params
         params.permit(:username, :password)
