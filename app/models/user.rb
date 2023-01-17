@@ -13,6 +13,7 @@ class User < ApplicationRecord
     
     # validations
     validates :username, presence: true, uniqueness:true
+    validates :email, presence: true, uniqueness:true
     validates :password, presence: true, format: { with: /\A(?=.*?[A-Z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{6,}\z/, 
     message: "must contain at least 1 uppercase letter, 1 numeric character, 1 special character, and must be 6 characters in length" }
 

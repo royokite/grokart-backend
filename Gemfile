@@ -35,5 +35,3 @@ gem 'bcrypt', '~> 3.1', '>= 3.1.18'
 gem 'jwt'
 
 gem 'rest-client'
-
-gem 'rack-cors'
