@@ -12,7 +12,8 @@ Rails.application.routes.draw do
   resources :products
   resources :users
 
-  # post 'login', to: 'authentication#login'
+  post '/login', to: 'authentication#login'
+
   # post 'add_to_cart' => 'cart#add_to_cart'
   # post 'order_complete' => 'cart#order_complete'
   # get 'view_order' => 'cart#view_order'
