@@ -36,4 +36,4 @@ gem 'jwt'
 
 gem 'rest-client'
 
-gem 'rack-cors'
+# gem 'rack-cors'
