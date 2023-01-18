@@ -10,19 +10,20 @@ class User < ApplicationRecord
     has_many :deliveries
 
     has_secure_password
-
-    enum role: [:admin, :user]
-    
+   
     # validations
     validates :username, presence: true, uniqueness:true
     validates :email, presence: true, uniqueness:true
-    validates :password, presence: true, format: { with: /\A(?=.*?[A-Z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{6,}\z/, 
-    message: "must contain at least 1 uppercase letter, 1 numeric character, 1 special character, and must be 6 characters in length" }
 
-    def role?(role)
-        self.role == role.to_s
-    end
-    
-  
+    PASSWORD_FORMAT = /\A
+        (?=.{6,})          # Must contain 6 or more characters
+        (?=.*\d)           # Must contain a digit
+        (?=.*[a-z])        # Must contain a lower case character
+        (?=.*[A-Z])        # Must contain an upper case character
+        (?=.*[[:^alnum:]]) # Must contain a symbol
+    /x    
+
+    validates :password, presence: true, format: { with: PASSWORD_FORMAT }, confirmation: true, on: :create
+    validates :password, allow_nil: true, format: { with: PASSWORD_FORMAT }, confirmation: true, on: :update
 
 end
