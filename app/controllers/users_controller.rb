@@ -20,26 +20,31 @@ class UsersController < ApplicationController
         end
     end
 
-    def update
-        unless user.update(find_params)
-            render json: { errrors: user.errors.full_messages }, status: :unprocessable_entity
+    def login
+        user = User.find_by(username: login_params[:username])
+        # authenticate user with both username and password
+        if user && user.authenticate(login_params[:password])
+            if user.role == "admin"
+                # issue admin token
+                token = encode_token(user_id: user.id, role: "admin")
+            else
+                # issue regular token
+                token = encode_token(user_id: user.id)
+            end
+            render json: {user: user, jwt: token}, status: :accepted
+        else
+            render json: { message: 'Invalid username or password' }, status: :unauthorized
         end
     end
 
-    def destroy
-        user = find_user
-        user.destroy
-        head :no_content
+    def profile
+        render json: {user: current_user}, status: :accepted
     end
 
     private
 
     def user_params
-        params.permit(:name, :username, :email, :age, :gender, :address, :contact, :password)
-    end  
-
-    def find_user
-        user = User.find(params[:id])
+        params.permit(:username, :password, :role)
     end
 
 end

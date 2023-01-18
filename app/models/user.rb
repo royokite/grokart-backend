@@ -10,6 +10,8 @@ class User < ApplicationRecord
     has_many :deliveries
 
     has_secure_password
+
+    enum role: [:admin, :user]
     
     # validations
     validates :username, presence: true, uniqueness:true
