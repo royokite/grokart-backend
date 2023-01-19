@@ -13,6 +13,7 @@ class UsersController < ApplicationController
 
     def create
         user = User.new(user_params)
+        user[:role] = "user"
         if user.save
             token = jwt_encode(user_id: user.id)
             render json: { token: token, user: user }, status: :ok

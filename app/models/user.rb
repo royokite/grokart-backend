@@ -24,6 +24,6 @@ class User < ApplicationRecord
     /x    
 
     validates :password, presence: true, format: { with: PASSWORD_FORMAT }, confirmation: true, on: :create
-    validates :password, allow_nil: true, format: { with: PASSWORD_FORMAT }, confirmation: true, on: :update
+    validates :password, allow_blank: true, format: { with: PASSWORD_FORMAT }, confirmation: true, on: :update
 
 end
