@@ -23,10 +23,10 @@ default: &default
 
 development:
   <<: *default
-  database: grokart_backend_development
-  host: localhost
-  username: postgres
-  password: 'Qazwsxcv'
+  url: <%= ENV['DATABASE_URL'] %>
+  pool: 5
+  timeout: 5000
+
 
   # The specified database role being used to connect to postgres.
   # To create additional roles in postgres see `$ createuser --help`.
@@ -89,6 +89,3 @@ test:
 production:
   <<: *default
   url: <%= ENV['DATABASE_URL'] %>
-  database: grokart_backend_production
-  username: grokart_backend
-  password: <%= ENV["GROKART_BACKEND_DATABASE_PASSWORD"] %>
