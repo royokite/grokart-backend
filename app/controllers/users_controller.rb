@@ -10,16 +10,16 @@ class UsersController < ApplicationController
     render json: user, status: :ok
   end
 
-  def create
-    user = User.new(user_params)
-    user.role = "user"
-    if user.save
-      token = jwt_encode(user_id: user.id)
-      render json: { token: token, user: user }, status: :ok
-    else
-      render json: { errors: user.errors.full_messages }, status: :unprocessable_entity
-    end
+ def create
+  user = User.new(user_params)
+  user[:role] = "user"
+  if user.save
+    render json: UserSerializer.new(user), status: :created
+  else
+    render json: { errors: user.errors.full_messages }, status: :unprocessable_entity
   end
+end
+
 
   def update
     user = find_user
