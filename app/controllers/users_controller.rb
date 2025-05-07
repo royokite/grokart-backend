@@ -14,11 +14,12 @@ class UsersController < ApplicationController
   user = User.new(user_params)
   user[:role] = "user"
   if user.save
-    render json: UserSerializer.new(user), status: :created
+    render json: user, status: :created  # Let ActiveModelSerializers do its job
   else
     render json: { errors: user.errors.full_messages }, status: :unprocessable_entity
   end
 end
+
 
 
   def update
