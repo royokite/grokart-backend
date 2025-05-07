@@ -7,8 +7,8 @@ class TransactionsController < ApplicationController
         transaction = Transaction.find_by(id: params[:id])
         if transaction
             render json: transaction
-        else 
+        else
             render json: {error: "Transaction not found"}, status: :not_found
         end
-    end    
+    end
 end

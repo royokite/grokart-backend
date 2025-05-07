@@ -7,7 +7,7 @@ class ProductsController < ApplicationController
     end
 
     def show
-        product = find_product        
+        product = find_product
         if product
             render json: product, status: :ok
         else

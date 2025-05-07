@@ -10,7 +10,6 @@ class User < ApplicationRecord
     has_many :deliveries
 
     has_secure_password
-   
     # validations
     validates :username, presence: true, uniqueness:true
     validates :email, presence: true, uniqueness:true
@@ -21,7 +20,7 @@ class User < ApplicationRecord
         (?=.*[a-z])        # Must contain a lower case character
         (?=.*[A-Z])        # Must contain an upper case character
         (?=.*[[:^alnum:]]) # Must contain a symbol
-    /x    
+    /x
 
     validates :password, presence: true, format: { with: PASSWORD_FORMAT }, confirmation: true, on: :create
     validates :password, allow_blank: true, format: { with: PASSWORD_FORMAT }, confirmation: true, on: :update

@@ -7,7 +7,7 @@ class CartsController < ApplicationController
         cart = Cart.find_by(id: params[:id])
         if cart
             render json: cart, include: :product
-        else 
+        else
             render json: {error: "Cart not found"}, status: :not_found
         end
     end
