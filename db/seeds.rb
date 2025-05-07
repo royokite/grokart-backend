@@ -1,33 +1,42 @@
 puts "🌱 Seeding..."
 
-Category.create([
-    {
-        category_name: "dairy",
-        description: "Food products made from milk. Such as cheese, cream, butter, ice cream and yogurt"
-    },
-    {
-        category_name: "meat",
-        description: "Flesh or other edible parts of animals used for food"
-    },
-    {
-        category_name: "fruits",
-        description: "Fruits are the fleshy or dry ripened ovaries of flowering plants, enclosing the seeds."
-    },
-    {
-        category_name: "vegetables",
-        description: "Vegetables are the edible portions of plants"
-    },
-    {
-        category_name: "drinks",
-        description: "Liquids intended for human consumption"
-    },
-    {
-        category_name: "pantry",
-        description: "Baked goods, eggs and snacks"
-    },
-])
+# Clear existing data (optional - uncomment if you want a clean slate)
+Product.destroy_all
+Category.destroy_all
 
-Product.create([
+# Create categories if they don't exist
+categories = {
+  1 => "dairy",
+  2 => "meat",
+  3 => "fruits",
+  4 => "vegetables",
+  5 => "drinks",
+  6 => "pantry"
+}
+
+categories.each do |id, name|
+  Category.find_or_create_by(id: id) do |category|
+    category.category_name = name
+    category.description = case name
+      when "dairy" then "Food products made from milk. Such as cheese, cream, butter, ice cream and yogurt"
+      when "meat" then "Flesh or other edible parts of animals used for food"
+      when "fruits" then "Fruits are the fleshy or dry ripened ovaries of flowering plants, enclosing the seeds."
+      when "vegetables" then "Vegetables are the edible portions of plants"
+      when "drinks" then "Liquids intended for human consumption"
+      when "pantry" then "Baked goods, eggs and snacks"
+    end
+  end
+end
+
+products_data = [
+  {
+    category_id: 1,
+    image: "https://cdn.mafrservices.com/sys-master-root/hba/h06/16975375499294/43316_main.jpg?im=Resize=480",
+    name: "Brookside Fresh Milk 500 ml",
+    price: 65.00,
+    count: 10,
+    description: "Boxed fresh milk 500 ml from Brookside dairy farms",
+  },
   {
     category_id: 1,
     image: "https://cdn.mafrservices.com/sys-master-root/hba/h06/16975375499294/43316_main.jpg?im=Resize=480",
@@ -268,6 +277,17 @@ Product.create([
         count: 10,
         description: "Popcorn kernels",
     }
-])
+]
 
-puts "✅ Done seeding!"
+# Create products without duplicates
+products_data.each do |product_data|
+  Product.find_or_create_by(name: product_data[:name]) do |product|
+    product.category_id = product_data[:category_id]
+    product.image = product_data[:image]
+    product.price = product_data[:price]
+    product.count = product_data[:count]
+    product.description = product_data[:description]
+  end
+end
+
+puts "✅ Done seeding! Created/updated #{Category.count} categories and #{Product.count} products."
